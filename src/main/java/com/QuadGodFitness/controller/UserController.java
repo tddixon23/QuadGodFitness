@@ -2,9 +2,9 @@ package com.QuadGodFitness.controller;
 
 
 
-import com.quadgodfitness.model.User;
-import com.quadgodfitness.repository.UserRepository;
-import com.quadgodfitness.util.JwtUtil;
+import com.QuadGodFitness.model.User;
+import com.QuadGodFitness.repository.UserRepository;
+import com.QuadGodFitness.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -40,7 +40,7 @@ public class UserController {
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
-            return jwtUtil.generateToken(user.getUsername());
+            return jwtUtil.generateToken((String) user.getUsername());
         } catch (AuthenticationException e) {
             throw new RuntimeException("Invalid credentials");
         }

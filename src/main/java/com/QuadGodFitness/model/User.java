@@ -17,6 +17,16 @@ public class User {
         throw new UnsupportedOperationException("Unimplemented method 'getPassword'");
     }
 
+    public void setPassword(String encode) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setPassword'");
+    }
+
+    public Object getUsername() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
+    }
+
     // Getters and Setters
 
 }
