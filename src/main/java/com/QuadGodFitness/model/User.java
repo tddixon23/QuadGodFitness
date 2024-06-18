@@ -11,6 +11,11 @@ public class User {
     private String username;
     private String password;
     private String email;
+    
+    public String getPassword() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPassword'");
+    }
 
     // Getters and Setters
 
