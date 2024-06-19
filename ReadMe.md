@@ -25,7 +25,7 @@ Fitness Repo that traces weightlifting and running milestones
 This is a desire to create my own logs of all things fitness.
 
 ## Features
-Description of features THAT ARE IN PROGRESS
+Description of DESIRED features THAT ARE IN PROGRESS
 
 * User Registration and Authentication
     * Backend: Spring Boot
@@ -69,10 +69,14 @@ Description of features THAT ARE IN PROGRESS
 
 
 ## Requirements
+Spring Boot requirements
 The application can be run locally
 
 ## Quick Start
-Fire it up
+- There is a "start-spring-boot.bat" file in the root of the directory.
+- Navigate to the QuadGodFitness directory
+- Type "start st" then tab to auto-populate the script into the command window.
+- Enter to start
 
 ## Testing
 Additional instructions for testing the application.
