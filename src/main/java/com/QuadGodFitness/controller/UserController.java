@@ -1,7 +1,5 @@
 package com.QuadGodFitness.controller;
 
-
-
 import com.QuadGodFitness.model.User;
 import com.QuadGodFitness.repository.UserRepository;
 import com.QuadGodFitness.util.JwtUtil;
@@ -12,6 +10,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/users")
@@ -36,13 +37,17 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody User user) {
+    public Map<String, String> login(@RequestBody User user) {
+        Map<String, String> response = new HashMap<>();
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
-            return jwtUtil.generateToken((String) user.getUsername());
+            String token = jwtUtil.generateToken(user.getUsername());
+            response.put("token", token);
+            return response;
         } catch (AuthenticationException e) {
-            throw new RuntimeException("Invalid credentials");
+            response.put("error", "Invalid credentials");
+            return response;
         }
     }
 }
