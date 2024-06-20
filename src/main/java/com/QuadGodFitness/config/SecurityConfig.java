@@ -1,7 +1,7 @@
 package com.QuadGodFitness.config;
 
 import com.QuadGodFitness.filter.JwtFilter;
-import com.QuadGodFitness.service.CustomUserDetailsService;
+import com.QuadGodFitness.security.SecurityUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,12 +25,12 @@ public class SecurityConfig {
     private JwtFilter jwtFilter;
 
     @Autowired
-    private CustomUserDetailsService customUserDetailsService;
+    private SecurityUserDetailsService securityUserDetailsService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
-            .authorizeHttpRequests()
+            .authorizeRequests()
             .requestMatchers("/api/users/register", "/api/users/login").permitAll()
             .anyRequest().authenticated()
             .and()
