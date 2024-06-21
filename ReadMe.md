@@ -16,11 +16,13 @@ Fitness Repo that traces weightlifting and running milestones
 - [Features](#features)
 - [Requirements](#requirements)
 - [Quick Start](#quick-start)
+- [Useful Bash Commands](#bash-commands)
 - [Testing](#testing)
 - [API](#requirements)
 - [Acknowledgements](#acknowledgements)
 
 ## Introduction
+
 
 This is a desire to create my own logs of all things fitness.
 
@@ -77,6 +79,11 @@ The application can be run locally
 - Navigate to the QuadGodFitness directory
 - Type "start st" then tab to auto-populate the script into the command window.
 - Enter to start
+
+## Useful Bash Commands
+
+- mvn install -DskipTests
+    - To skip running the tests for a particular project, set the skipTests property to true.
 
 ## Testing
 Additional instructions for testing the application.
