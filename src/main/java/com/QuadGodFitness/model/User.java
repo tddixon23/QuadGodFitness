@@ -3,6 +3,7 @@ package com.QuadGodFitness.model;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Entity;
 
 public class User {
     @Id
@@ -11,22 +12,38 @@ public class User {
     private String username;
     private String password;
     private String email;
-    
-    public String getPassword() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPassword'");
+
+    // Getters and Setters
+    public Long getId() {
+        return id;
     }
 
-    public void setPassword(String encode) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setPassword'");
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
+        return username;
     }
 
-    // Getters and Setters
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
 }
