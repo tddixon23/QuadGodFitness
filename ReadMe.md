@@ -20,9 +20,9 @@ Fitness Repo that traces weightlifting and running milestones
 - [Testing](#testing)
 - [API](#requirements)
 - [Acknowledgements](#acknowledgements)
+- [To-Do](#to-do)
 
 ## Introduction
-
 
 This is a desire to create my own logs of all things fitness.
 
@@ -80,7 +80,7 @@ The application can be run locally
 - Type "start st" then tab to auto-populate the script into the command window.
 - Enter to start
 
-## Useful Bash Commands
+## Bash Commands
 
 - mvn install -DskipTests
     - To skip running the tests for a particular project, set the skipTests property to true.
@@ -93,3 +93,5 @@ TODO: API Reference with examples, or a link to a wiki or other documentation so
 
 ## Acknowledgements
 
+## To-Do
+- Install maven spotless
