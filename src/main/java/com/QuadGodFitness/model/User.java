@@ -4,6 +4,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
+import org.springframework.security.core.userdetails.UserDetails;
+
 import jakarta.persistence.Entity;
 
 @Entity
