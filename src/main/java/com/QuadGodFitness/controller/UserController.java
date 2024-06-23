@@ -3,51 +3,53 @@ package com.QuadGodFitness.controller;
 import com.QuadGodFitness.model.User;
 import com.QuadGodFitness.repository.UserRepository;
 import com.QuadGodFitness.util.JwtUtil;
+import com.QuadGodFitness.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
 
     @Autowired
     private JwtUtil jwtUtil;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @PostMapping("/register")
-    public User register(@RequestBody User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+    public String register(@RequestBody User user) {
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        userRepository.save(user);
+        return "User registered successfully";
     }
 
     @PostMapping("/login")
-    public Map<String, String> login(@RequestBody User user) {
-        Map<String, String> response = new HashMap<>();
+    public String login(@RequestBody User user) throws Exception {
         try {
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
-            String token = jwtUtil.generateToken(user.getUsername());
-            response.put("token", token);
-            return response;
-        } catch (AuthenticationException e) {
-            response.put("error", "Invalid credentials");
-            return response;
+            authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword())
+            );
+        } catch (Exception e) {
+            throw new Exception("Invalid username or password");
         }
+
+        // Load UserDetails object
+        final UserDetails userDetails = customUserDetailsService.loadUserByUsername(user.getUsername());
+
+        // Generate token using UserDetails object
+        final String token = jwtUtil.generateToken(userDetails);
+
+        return token;
     }
 }
