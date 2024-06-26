@@ -2,14 +2,15 @@ package com.QuadGodFitness.controller;
 
 import com.QuadGodFitness.model.User;
 import com.QuadGodFitness.repository.UserRepository;
-import com.QuadGodFitness.util.JwtUtil;
 import com.QuadGodFitness.service.CustomUserDetailsService;
+import com.QuadGodFitness.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
@@ -28,14 +29,14 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping("/register")
-    public String register(@RequestBody User user) {
+    public ResponseEntity<String> register(@RequestBody User user) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userRepository.save(user);
-        return "User registered successfully";
+        return ResponseEntity.ok("User registered successfully");
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody User user) throws Exception {
+    public ResponseEntity<String> login(@RequestBody User user) throws Exception {
         try {
             authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword())
@@ -50,6 +51,6 @@ public class UserController {
         // Generate token using UserDetails object
         final String token = jwtUtil.generateToken(userDetails);
 
-        return token;
+        return ResponseEntity.ok(token);
     }
 }
